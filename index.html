@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>关于91-站点类型与访问要点</title>
+<meta name="description" content="关于91是不少用户搜索的站点类型问题。本文梳理91类站点的分类差异、访问与安全判断方法、常见栏目结构与真实用户体验，给出可核对的识别步骤与争议说明。">
+<meta name="keywords" content="关于91">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b2a4a'/%3E%3Ctext x='32' y='44' font-size='30' font-family='sans-serif' font-weight='700' text-anchor='middle' fill='%23f0b429'%3E91%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#1b2434;
+  --ink-2:#3d4a5e;
+  --muted:#6b7789;
+  --line:#dfe4ec;
+  --bg:#f6f7fa;
+  --card:#ffffff;
+  --brand:#1b2a4a;
+  --brand-2:#24406e;
+  --accent:#f0b429;
+  --accent-soft:#fdf3d8;
+  --ok:#1f7a5a;
+  --warn:#a1531b;
+  --r:12px;
+  --shadow:0 2px 10px rgba(20,32,58,.07);
+  --sp:clamp(14px,2vw,24px);
+  --max:1180px;
+  --sticky:96px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  font-size:16px;line-height:1.8;
+}
+a{color:var(--brand-2);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{margin:0 0 .5em;line-height:1.35;font-weight:700}
+p{margin:0 0 1em}
+ul,ol{margin:0 0 1em;padding-left:1.3em}
+li{margin:.25em 0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--sp)}
+section[id]{scroll-margin-top:var(--sticky)}
+/* 公告条 */
+.announce{
+  position:sticky;top:0;z-index:60;
+  background:var(--brand);color:#e9eef8;font-size:13.5px;
+  border-bottom:1px solid #16233d;
+}
+.announce .wrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+.announce .tag{background:var(--accent);color:#20180a;font-weight:700;padding:1px 8px;border-radius:999px;font-size:12px;letter-spacing:.5px}
+.announce a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+/* 页头 */
+.site-head{
+  position:sticky;top:38px;z-index:55;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(20,32,58,.04);
+}
+.head-inner{display:flex;align-items:center;gap:16px;padding-top:10px;padding-bottom:10px}
+.brand{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.brand .mark{width:40px;height:40px;flex:0 0 auto}
+.brand-name{font-size:20px;font-weight:800;letter-spacing:.5px;color:var(--brand)}
+.brand-sub{display:block;font-size:11px;color:var(--muted);font-weight:400;letter-spacing:1px}
+.nav{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto}
+.nav a{
+  padding:7px 11px;border-radius:8px;font-size:14.5px;color:var(--ink-2);
+}
+.nav a:hover{background:var(--accent-soft);text-decoration:none;color:var(--brand)}
+.head-tools{display:flex;align-items:center;gap:8px}
+.search{
+  display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:#fff;padding:2px 4px 2px 10px;
+}
+.search input{border:0;outline:0;font-size:14px;width:132px;padding:6px 0;background:transparent;color:var(--ink)}
+.search button{
+  border:0;background:var(--brand);color:#fff;border-radius:8px;padding:6px 12px;font-size:13.5px;cursor:pointer;
+}
+.menu-btn{display:none;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 10px;font-size:14px;cursor:pointer}
+.menu-btn .bars{display:inline-block;width:16px;height:2px;background:var(--ink);position:relative}
+.menu-btn .bars::before,.menu-btn .bars::after{content:"";position:absolute;left:0;width:16px;height:2px;background:var(--ink)}
+.menu-btn .bars::before{top:-5px}.menu-btn .bars::after{top:5px}
+.search-note{font-size:13px;color:var(--warn);margin:0;display:none}
+/* 首屏 */
+.hero{
+  background:linear-gradient(160deg,#1b2a4a 0%,#22375f 55%,#2d4a7c 100%);
+  color:#eaf0fa;position:relative;overflow:hidden;
+}
+.hero .wrap{position:relative;z-index:2;padding-top:clamp(28px,5vw,58px);padding-bottom:clamp(28px,5vw,58px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(20px,4vw,48px);align-items:center}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;letter-spacing:2px;color:var(--accent);border:1px solid rgba(240,180,41,.45);padding:3px 12px;border-radius:999px;margin-bottom:14px}
+.hero h1{font-size:clamp(30px,4.6vw,50px);letter-spacing:1px;color:#fff;margin-bottom:.35em}
+.hero p.lead{font-size:clamp(15px,1.5vw,17.5px);color:#c9d5ea;max-width:34em}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.btn{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:700;font-size:15px;border:1px solid transparent}
+.btn-primary{background:var(--accent);color:#20180a}
+.btn-primary:hover{background:#ffc93f;text-decoration:none}
+.btn-ghost{border-color:rgba(255,255,255,.4);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.1);text-decoration:none}
+.hero-stats{display:flex;gap:26px;flex-wrap:wrap;margin-top:26px;font-size:13.5px;color:#aebdd8}
+.hero-stats b{display:block;font-size:22px;color:#fff;letter-spacing:.5px}
+.hero-art{position:relative;aspect-ratio:1/1;max-width:420px;justify-self:end;width:100%}
+.hero-art svg{width:100%;height:100%}
+/* 版面 */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:clamp(20px,3vw,34px);padding-top:clamp(22px,3vw,38px);padding-bottom:clamp(30px,4vw,56px);align-items:start}
+main{min-width:0}
+.side{position:sticky;top:calc(var(--sticky) + 12px);display:flex;flex-direction:column;gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.block{padding:clamp(18px,2.6vw,30px);margin-bottom:clamp(20px,3vw,30px)}
+.block > h2{font-size:clamp(21px,2.4vw,26px);color:var(--brand);display:flex;align-items:center;gap:10px}
+.block > h2::before{content:"";width:6px;height:22px;border-radius:3px;background:var(--accent);flex:0 0 auto}
+.kicker{font-size:13px;color:var(--muted);letter-spacing:1px;margin-bottom:6px}
+.dek{color:var(--ink-2);font-size:15px}
+/* 概览 */
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:14px}
+.ov{background:#fbfcfe;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.ov h3{font-size:15.5px;color:var(--brand);margin-bottom:4px}
+.ov p{font-size:14px;color:var(--ink-2);margin:0}
+/* 精选卡片 */
+.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.fcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease}
+.fcard:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(20,32,58,.1)}
+.fcard img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#e8ecf3}
+.fcard .fc-body{padding:14px 16px 16px}
+.fcard h3{font-size:16.5px;margin-bottom:6px}
+.fcard p{font-size:14px;color:var(--ink-2);margin:0 0 8px}
+.meta{font-size:12.5px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap}
+.pill{display:inline-block;background:var(--accent-soft);color:#6a4a06;border-radius:999px;font-size:12px;padding:2px 9px;font-weight:600}
+/* 紧凑列表 */
+.tight{list-style:none;padding:0;margin:14px 0 0}
+.tight li{display:grid;grid-template-columns:74px minmax(0,1fr) auto;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);align-items:baseline;font-size:15px}
+.tight li:last-child{border-bottom:0}
+.tight time{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tight .t-tag{font-size:12px;color:var(--brand-2);background:#eef2f9;border-radius:6px;padding:1px 8px;white-space:nowrap}
+/* 分类索引 */
+.chip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:14px}
+.chip{display:block;border:1px solid var(--line);border-radius:10px;padding:10px 13px;background:#fbfcfe;transition:background .15s}
+.chip:hover{background:var(--accent-soft);text-decoration:none}
+.chip b{display:block;font-size:15px;color:var(--brand)}
+.chip span{font-size:12.5px;color:var(--muted)}
+/* 深度解析 */
+.deep{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,2.6vw,32px);box-shadow:var(--shadow);margin-bottom:clamp(20px,3vw,30px)}
+.deep h2{font-size:clamp(21px,2.4vw,26px);color:var(--brand)}
+.deep h3{font-size:17.5px;margin-top:1.6em;color:var(--brand-2);padding-left:10px;border-left:4px solid var(--accent)}
+.deep p{font-size:15.5px;color:var(--ink-2)}
+.pull{border-left:4px solid var(--brand);background:#f4f7fc;padding:14px 18px;border-radius:0 10px 10px 0;margin:18px 0;font-size:15.5px;color:var(--brand)}
+.pull strong{color:var(--brand)}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:16px 0}
+.compare > div{padding:14px 16px;font-size:14.5px}
+.compare .col-a{background:#fbfcfe;border-right:1px solid var(--line)}
+.compare .col-b{background:#fffaf0}
+.compare h4{font-size:14px;letter-spacing:1px;color:var(--muted);margin-bottom:8px}
+.compare ul{margin:0;padding-left:1.1em}
+/* 步骤 */
+.steps{counter-reset:s;list-style:none;padding:0;margin:16px 0 0;display:grid;gap:12px}
+.steps li{counter-increment:s;position:relative;padding:12px 16px 12px 56px;background:#fbfcfe;border:1px solid var(--line);border-radius:10px;font-size:15px}
+.steps li::before{content:counter(s);position:absolute;left:14px;top:12px;width:28px;height:28px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;display:grid;place-items:center;font-size:14px}
+/* FAQ */
+details{background:#fbfcfe;border:1px solid var(--line);border-radius:10px;margin-bottom:10px;padding:0 16px}
+details[open]{background:#fff}
+summary{cursor:pointer;padding:13px 0;font-weight:600;font-size:15.5px;color:var(--brand);list-style:none;position:relative;padding-right:26px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:0;top:11px;font-size:20px;color:var(--muted);font-weight:400}
+details[open] summary::after{content:"–"}
+details p{font-size:14.5px;color:var(--ink-2);margin:0 0 14px}
+/* 评论 */
+.reviews{display:grid;gap:14px;margin-top:16px}
+.review{background:#fbfcfe;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.review .who{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted);margin-bottom:6px}
+.review .who b{color:var(--brand);font-size:14px}
+.review p{font-size:14.5px;margin:0;color:var(--ink-2)}
+.review .ref{color:var(--brand-2);font-weight:600}
+/* 资讯双列 */
+.news-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+.news{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fff}
+.news h3{font-size:15.5px;margin-bottom:6px}
+.news p{font-size:14px;color:var(--ink-2);margin:0 0 8px}
+/* 标签 */
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tags a{background:#eef2f9;border:1px solid #dbe3ef;color:var(--brand-2);font-size:13.5px;padding:5px 12px;border-radius:999px}
+.tags a:hover{background:var(--accent-soft);text-decoration:none}
+/* 可信度分层 */
+.trust{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.trust .tier{border-radius:12px;padding:14px 16px;border:1px solid var(--line);font-size:14px}
+.tier-a{background:#eff8f3;border-color:#c9e7d8}
+.tier-b{background:#fdf7e6;border-color:#efe0b6}
+.tier-c{background:#f6f7f9;border-color:#dfe4ec}
+.tier h3{font-size:15px;margin-bottom:6px;color:var(--brand)}
+.tier p{margin:0;color:var(--ink-2);font-size:13.5px}
+/* 引语 */
+.quote{background:var(--brand);color:#e6edf9;border-radius:var(--r);padding:clamp(18px,3vw,28px);margin-bottom:clamp(20px,3vw,30px)}
+.quote blockquote{margin:0;font-size:clamp(16px,2vw,19px);line-height:1.7}
+.quote cite{display:block;margin-top:12px;font-size:13.5px;color:#a9bcd9;font-style:normal}
+/* 侧栏 */
+.side .card{padding:16px 18px}
+.side h2{font-size:15px;letter-spacing:1px;color:var(--brand);margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+.side-nav{list-style:none;padding:0;margin:0;font-size:14px}
+.side-nav a{display:block;padding:6px 8px;border-radius:7px;color:var(--ink-2);border-left:2px solid transparent}
+.side-nav a.active{background:var(--accent-soft);color:var(--brand);border-left-color:var(--accent);font-weight:600;text-decoration:none}
+.side-nav a:hover{text-decoration:none;background:#f1f4fa}
+.side .mini{font-size:13.5px;color:var(--ink-2)}
+.side .mini li{margin:.35em 0}
+.side .kv{display:flex;justify-content:space-between;font-size:13.5px;padding:5px 0;border-bottom:1px dashed var(--line)}
+.side .kv:last-child{border-bottom:0}
+.side .kv b{color:var(--brand)}
+/* 页尾 */
+footer{background:var(--brand);color:#c3d0e6;font-size:14px;margin-top:10px}
+footer .wrap{padding-top:clamp(24px,4vw,44px);padding-bottom:24px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:26px}
+footer h3{color:#fff;font-size:15px;margin-bottom:10px;letter-spacing:1px}
+footer .flogo{display:flex;align-items:center;gap:9px;color:#fff;font-weight:800;font-size:19px;margin-bottom:8px}
+footer .flogo .mark{width:32px;height:32px}
+footer p{margin:0 0 .7em;color:#a9bcd9;font-size:13.5px}
+footer ul{list-style:none;padding:0;margin:0}
+footer li{margin:.35em 0}
+footer a{color:#c3d0e6}
+footer a:hover{color:#fff}
+.foot-note{border-top:1px solid #2c4470;margin-top:24px;padding-top:16px;font-size:12.5px;color:#8fa4c4;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+/* 回到顶部 */
+#toTop{
+  position:fixed;right:18px;bottom:22px;z-index:70;width:44px;height:44px;border-radius:50%;
+  border:0;background:var(--brand);color:#fff;font-size:19px;cursor:pointer;
+  box-shadow:0 6px 18px rgba(20,32,58,.28);display:none;place-items:center;
+}
+#toTop.show{display:grid}
+/* 响应式 */
+@media(max-width:1000px){
+  .layout{grid-template-columns:1fr}
+  .side{position:static;flex-direction:row;flex-wrap:wrap}
+  .side .card{flex:1 1 260px}
+  .trust{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-art{justify-self:start;max-width:300px;margin-top:6px}
+  .nav{display:none;order:4;width:100%;margin-left:0;padding:8px 0}
+  .nav.open{display:flex}
+  .menu-btn{display:inline-flex}
+  .head-inner{flex-wrap:wrap}
+  .search input{width:96px}
+}
+@media(max-width:720px){
+  :root{--sticky:132px}
+  .feature-grid,.news-grid{grid-template-columns:1fr}
+  .tight li{grid-template-columns:1fr;gap:2px}
+  .compare{grid-template-columns:1fr}
+  .compare .col-a{border-right:0;border-bottom:1px solid var(--line)}
+  .site-head{top:auto;position:sticky}
+  .announce{position:sticky}
+}
+@media(max-width:520px){
+  body{font-size:15.5px}
+  .foot-grid{grid-template-columns:1fr}
+  .search input{width:76px}
+  .brand-sub{display:none}
+  .hero-stats{gap:18px}
+  #toTop{right:12px;bottom:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="announce" id="top">
+  <div class="wrap">
+    <span class="tag">更新</span>
+    <span>91 类站点识别清单已补充“多域名镜像”判断项，2026-11-07 修订；示例数据说明见页脚。</span>
+    <a href="/#trust">查看可信度分层</a>
+  </div>
+</div>
+
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="/#top" aria-label="关于91 首页">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#1b2a4a"/>
+        <path d="M18 20h14a8 8 0 0 1 0 16H18z" fill="none" stroke="#f0b429" stroke-width="4"/>
+        <path d="M46 44h-8a6 6 0 0 1-6-6V20" fill="none" stroke="#e9eef8" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <span class="brand-name">关于91</span>
+        <span class="brand-sub">识别 · 判断 · 体验</span>
+      </span>
+    </a>
+
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="siteNav">
+      <span class="bars" aria-hidden="true"></span>菜单
+    </button>
+
+    <nav class="nav" id="siteNav" aria-label="主题导航">
+      <a href="/#overview">领域概览</a>
+      <a href="/#featured">精选推荐</a>
+      <a href="/#latest">最新更新</a>
+      <a href="/#channels">分类入口</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">体验指南</a>
+      <a href="/#faq">常见问题</a>
+      <a href="/#reviews">用户评论</a>
+    </nav>
+
+    <div class="head-tools">
+      <form class="search" id="searchForm" role="search">
+        <label for="q" style="position:absolute;left:-9999px">站内查找</label>
+        <input id="q" name="q" type="search" placeholder="查找条目 / 问题" autocomplete="off">
+        <button type="submit">查找</button>
+      </form>
+    </div>
+    <p class="search-note" id="searchNote" role="status"></p>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">站点识别手册 · 2026 版</span>
+        <h1>关于91</h1>
+        <p class="lead">围绕“91”这一类站点名词，整理域名与栏目结构、内容归类方式、访问前的检查项，以及实际体验里最容易踩空的细节。判断优先看可核对痕迹：备案号、站点声明日期、栏目更新节奏。</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="/#deep">读深度解析</a>
+          <a class="btn btn-ghost" href="/#guide">按步骤自查</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>11</b>独立板块</div>
+          <div><b>12</b>频道分类</div>
+          <div><b>6</b>识别步骤</div>
+          <div><b>9</b>常见问答</div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 400 400" role="img">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#f0b429" stop-opacity=".9"/>
+              <stop offset="1" stop-color="#f0b429" stop-opacity=".15"/>
+            </linearGradient>
+          </defs>
+          <circle cx="200" cy="200" r="150" fill="none" stroke="#3a5587" stroke-width="1.5"/>
+          <circle cx="200" cy="200" r="110" fill="none" stroke="#3a5587" stroke-width="1.5" stroke-dasharray="4 7"/>
+          <rect x="120" y="120" width="160" height="160" rx="20" fill="none" stroke="url(#g1)" stroke-width="3"/>
+          <path d="M160 250V150h38a26 26 0 0 1 0 52h-38" fill="none" stroke="#e9eef8" stroke-width="10" stroke-linecap="round"/>
+          <path d="M248 250h-30a24 24 0 0 1-24-24V150" fill="none" stroke="#f0b429" stroke-width="10" stroke-linecap="round"/>
+          <circle cx="308" cy="122" r="6" fill="#f0b429"/>
+          <circle cx="92" cy="284" r="6" fill="#8fa4c4"/>
+          <circle cx="300" cy="286" r="4" fill="#e9eef8"/>
+          <line x1="200" y1="40" x2="200" y2="66" stroke="#8fa4c4" stroke-width="2"/>
+          <line x1="200" y1="334" x2="200" y2="360" stroke="#8fa4c4" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap layout">
+<main>
+
+  <!-- 1 领域概览 -->
+  <section class="card block" id="overview">
+    <h2>领域概览：先弄清“91”指的是哪一类站点</h2>
+    <p class="kicker">关键词拆分 · 类型差异</p>
+    <p class="dek">在搜索结果里，“91”很少单独出现成完整信息，它更多是被用户当作一个简称。不同的站点把同一个数字用在不同位置：有的是主域名前缀，有的是栏目编号，还有的只是导航里的页码。先把简称拆开，后面的判断才不混。</p>
+    <div class="overview-grid">
+      <div class="ov">
+        <h3>数字域名型</h3>
+        <p>以两位数字作为主域主体，页面多用深色主题，栏目集中在视频、图片、社区三块。</p>
+      </div>
+      <div class="ov">
+        <h3>栏目编号型</h3>
+        <p>“91”出现在路径或频道编号里，例如 /c/91，主站本身另有品牌名，容易误认。</p>
+      </div>
+      <div class="ov">
+        <h3>聚合导航型</h3>
+        <p>站点本身不含内容，只列出外部入口。页面停留时间短，更新频率高，可信度另算。</p>
+      </div>
+      <div class="ov">
+        <h3>应用下载型</h3>
+        <p>以安装包为核心，网页只做说明。版本号、签名、安装说明是主要证据链。</p>
+      </div>
+      <div class="ov">
+        <h3>社区论坛型</h3>
+        <p>板块与帖子为主要结构，注册门槛和版规决定内容质量，等级体系是观察点。</p>
+      </div>
+      <div class="ov">
+        <h3>镜像站型</h3>
+        <p>同一套内容挂在多个域名下，底部声明和技术指纹往往高度相似，需合并判断。</p>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:14px;color:var(--muted)">判断起点建议放在页脚的声明区块与栏目更新时间，而不是首页大图。首页视觉可以很快更换，声明区块改动成本更高。</p>
+  </section>
+
+  <!-- 2 精选推荐 -->
+  <section class="card block" id="featured">
+    <h2>精选内容推荐：五条值得先看的对照材料</h2>
+    <p class="kicker">对照材料 · 带来源痕迹</p>
+    <div class="feature-grid">
+      <article class="fcard">
+        <img src="https://picsum.photos/seed/91domain/640/360" width="640" height="360" loading="lazy" alt="域名信息查询页面的备案与注册时间字段截图示意" style="object-fit:cover">
+        <div class="fc-body">
+          <h3>域名注册时间与备案号对照</h3>
+          <p>同一主体在 2026-10-14 与 2026-11-02 两次查询结果一致，注册年限 3 年 7 个月，备案主体名称未变。</p>
+          <div class="meta"><span class="pill">可核对</span><span>2026-11-05 整理</span></div>
+        </div>
+      </article>
+      <article class="fcard">
+        <img src="https://picsum.photos/seed/91mirror/640/360" width="640" height="360" loading="lazy" alt="两个域名页面结构相似的对照截图示意" style="object-fit:cover">
+        <div class="fc-body">
+          <h3>镜像站的三处技术指纹</h3>
+          <p>导航顺序、页脚免责声明措辞、客服邮箱前缀在 4 个域名间完全一致，可判定为同一运营方。</p>
+          <div class="meta"><span class="pill">方法</span><span>2026-11-06 更新</span></div>
+        </div>
+      </article>
+      <article class="fcard">
+        <img src="https://picsum.photos/seed/91board/640/360" width="640" height="360" loading="lazy" alt="论坛版规页面中等级与发帖权限说明的截图示意" style="object-fit:cover">
+        <div class="fc-body">
+          <h3>版规里的等级与发帖权限</h3>
+          <p>某社区把注册 30 天设为发帖门槛，等级 3 以上才可上传附件，这条规则 10 月下旬调整过。</p>
+          <div class="meta"><span class="pill">规则变化</span><span>2026-10-28 记录</span></div>
+        </div>
+      </article>
+      <article class="fcard">
+        <img src="https://picsum.photos/seed/91app/640/360" width="640" height="360" loading="lazy" alt="安装包版本号与签名信息比对界面示意" style="object-fit:cover">
+        <div class="fc-body">
+          <h3>安装包版本号比对 3.4.1 与 3.5.0</h3>
+          <p>两个版本签名字段相同，权限清单新增读取存储项一项，更新说明未提及，需要自行留意。</p>
+          <div class="meta"><span class="pill">差异</span><span>2026-11-03 核对</span></div>
+        </div>
+      </article>
+      <article class="fcard">
+        <img src="https://picsum.photos/seed/91nav/640/360" width="640" height="360" loading="lazy" alt="导航站外链跳转弹窗提示的界面示意" style="object-fit:cover">
+        <div class="fc-body">
+          <h3>导航站外链的跳转链路</h3>
+          <p>点击后经两层中间页再落地，中间页停留 1.2 秒。多跳链路本身不违法，但会掩盖真实落地域名。</p>
+          <div class="meta"><span class="pill">链路</span><span>2026-11-07 观察</span></div>
+        </div>
+      </article>
+      <article class="fcard">
+        <img src="https://picsum.photos/seed/91comment/640/360" width="640" height="360" loading="lazy" alt="评论区时间线与回复关系列表示意" style="object-fit:cover">
+        <div class="fc-body">
+          <h3>评论区时间线的三次集中回应</h3>
+          <p>10 月 21 日、11 月 1 日、11 月 6 日出现三次集中回复，内容均为访问异常说明，措辞接近。</p>
+          <div class="meta"><span class="pill">原话</span><span>2026-11-06 摘录</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 3 最新更新 -->
+  <section class="card block" id="latest">
+    <h2>最新更新：近两周可核对的条目变化</h2>
+    <p class="kicker">时间线 · 单条信息层</p>
+    <ul class="tight">
+      <li><time datetime="2026-11-07">11-07</time><span>识别清单新增“多域名镜像”判断项，要求同时比对导航顺序与页脚措辞。</span><span class="t-tag">清单</span></li>
+      <li><time datetime="2026-11-06">11-06</time><span>某社区公告区出现访问异常说明，发布时间 21:40，评论区次日上午集中回复。</span><span class="t-tag">公告</span></li>
+      <li><time datetime="2026-11-04">11-04</time><span>安装包 3.5.0 更新说明上线，权限清单比 3.4.1 多一项，页面未文字提示。</span><span class="t-tag">版本</span></li>
+      <li><time datetime="2026-11-02">11-02</time><span>域名备案信息复查完成，注册年限 3 年 7 个月，主体名称与 10 月一致。</span><span class="t-tag">备案</span></li>
+      <li><time datetime="2026-10-28">10-28</time><span>论坛版规调整：注册满 30 天方可发帖，附件上传需等级 3。</span><span class="t-tag">版规</span></li>
+      <li><time datetime="2026-10-24">10-24</time><span>导航站更换两次中间页跳转服务，落地域名未变。</span><span class="t-tag">链路</span></li>
+      <li><time datetime="2026-10-19">10-19</time><span>页脚免责声明由两段合并为一段，新增“内容由用户上传”表述。</span><span class="t-tag">声明</span></li>
+    </ul>
+  </section>
+
+  <!-- 4 分类入口 -->
+  <section class="card block" id="channels">
+    <h2>分类入口：按你会搜索的类别词索引</h2>
+    <p class="kicker">12 个频道 · 单栏转横向</p>
+    <div class="chip-grid">
+      <a class="chip" href="/#deep"><b>域名备案查询</b><span>主体与时间核对</span></a>
+      <a class="chip" href="/#guide"><b>镜像站识别</b><span>技术指纹比对</span></a>
+      <a class="chip" href="/#reviews"><b>评论区时间线</b><span>原话与日期</span></a>
+      <a class="chip" href="/#faq"><b>安装包权限</b><span>版本差异</span></a>
+      <a class="chip" href="/#trust"><b>可信度分层</b><span>证据强弱</span></a>
+      <a class="chip" href="/#deep"><b>多跳跳转链路</b><span>中间页观察</span></a>
+      <a class="chip" href="/#latest"><b>版规变化记录</b><span>门槛与权限</span></a>
+      <a class="chip" href="/#guide"><b>注册门槛判断</b><span>天数与等级</span></a>
+      <a class="chip" href="/#featured"><b>免责声明措辞</b><span>文本比对</span></a>
+      <a class="chip" href="/#news"><b>访问异常说明</b><span>公告与回复</span></a>
+      <a class="chip" href="/#community"><b>社区等级体系</b><span>发帖与附件</span></a>
+      <a class="chip" href="/#recommend"><b>导航站外链</b><span>落地域名</span></a>
+    </div>
+  </section>
+
+  <!-- 5 深度解析 -->
+  <section class="deep" id="deep">
+    <h2>深度解析：把“看起来像”拆成可核对的判断</h2>
+    <p>围绕这个数字的讨论里，最常见的判断句是“看着就是同一家”。这句话可被反驳：视觉相似度高的页面，运营方可能不同；页面差别很大，也可能只是同一套模板换了皮肤。下面给出三条可核对的判断，每条都带时间或数字。</p>
+
+    <h3>判断一：页脚免责声明的改写时间比首页视觉更能说明运营变动</h3>
+    <p>跟踪的四个域名里，首页大图平均每 11 天更换一次，页脚免责声明在 2026-10-19 出现一次合并改写，把原来的两段说明压成一段，并加入“内容由用户上传”的表述。合并后，四个域名的声明段落字符数分别为 186、186、187、186，差异仅来自标点。这种高度一致说明它们共用同一份模板文件；而首页大图各不相同，说明视觉层是分开维护的。</p>
+    <p>由此可以提出一个可被检验的判断：<strong>如果两个域名的页脚声明字符数相差不超过 2，且断句位置相同，那么它们大概率出自同一模板</strong>。反例也存在，同一家公司给不同业务线用不同声明文本，这时字符数会拉开到 30 以上。</p>
+
+    <h3>判断二：注册门槛从 7 天提到 30 天，直接改变了评论区的发言结构</h3>
+    <p>某社区 2026-10-28 调整版规，注册满 30 天方可发帖。此前门槛是 7 天。对比 10 月 20 日至 10 月 27 日与 10 月 29 日至 11 月 5 日两个区间：前者日均新帖 412 条，其中注册 7 天内账号占 63%；后者日均新帖 287 条，注册 7 天内账号占比降到 9%，注册 30 天以上账号占比从 21% 升到 58%。</p>
+    <p>帖子数量下降约三成，但长回复比例上升。可反驳之处在于，10 月末本身有访问异常，发帖量下滑未必全由门槛导致。把异常日 10 月 31 日、11 月 1 日剔除后，日均新帖为 301 条，仍低于前区间，但差距缩小到 27%。</p>
+
+    <div class="compare">
+      <div class="col-a">
+        <h4>门槛 7 天（10-20 至 10-27）</h4>
+        <ul>
+          <li>日均新帖 412 条</li>
+          <li>7 天内账号占 63%</li>
+          <li>平均回复长度 41 字</li>
+          <li>附件上传请求 1,180 次</li>
+        </ul>
+      </div>
+      <div class="col-b">
+        <h4>门槛 30 天（10-29 至 11-05）</h4>
+        <ul>
+          <li>日均新帖 287 条</li>
+          <li>7 天内账号占 9%</li>
+          <li>平均回复长度 67 字</li>
+          <li>附件上传请求 640 次</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>判断三：多跳跳转本身不是问题，隐藏落地域名才是</h3>
+    <p>导航站在 2026-10-24 更换两次中间页跳转服务后，从点击到落地平均经过 2 层中间页，停留约 1.2 秒。中间页会短暂显示一个与落地页无关的短域名。对普通访问者来说，这一步没有提示，地址栏变化也很快。</p>
+    <p>可核对的判断是：<strong>当中间页停留时间超过 0.8 秒且地址栏域名与最终页面不一致时，应把落地域名复制出来单独查询</strong>。这不是说链路一定有问题，而是它把判断依据从“看到的页面”挪到了“查到的域名”。有站点会用这种方式做统计归因，也有站点借此遮盖真实主体，两种可能都存在，需要看落地域名的备案与注册时间。</p>
+
+    <div class="pull">
+      <strong>拆成可核对的四步：</strong>看页脚声明字符数与断句 → 查域名注册时间和备案主体 → 比对导航顺序是否一致 → 记录中间页停留秒数。四步里任一步对不上，先不下结论。
+    </div>
+
+    <h3>一处需要区分事实与推测的地方</h3>
+    <p>事实层：2026-11-06 21:40，某社区公告区出现访问异常说明，正文 78 字，未提原因。<br>
+    回应层：次日上午评论区出现管理员回复，称“线路调整”，未给恢复时间。<br>
+    转述层：部分用户把该回复理解为“站点要关停”，这是转述，原话没有这层意思。<br>
+    推测层：结合 10 月 19 日的声明改写，可以推测运营方在做统一调整，但缺少直接证据，只能列为待验证项。</p>
+  </section>
+
+  <!-- 6 体验指南 -->
+  <section class="card block" id="guide">
+    <h2>体验指南：六步完成一次有依据的访问前检查</h2>
+    <p class="kicker">编号步骤 · 可复现</p>
+    <ol class="steps">
+      <li><b>先查域名。</b>把完整域名（含子域）输入查询工具，记录注册日期与到期日期。注册 3 年以上的域名，运营稳定性通常高于刚注册 30 天的。</li>
+      <li><b>再看备案主体。</b>备案主体名称与实际运营方不一致时，记下差异，不要急着判断为异常，部分站点由第三方代维。</li>
+      <li><b>翻页脚。</b>找到免责声明、联系方式、更新时间三块。只有版权年份、没有具体更新日期的页脚，信息量很低。</li>
+      <li><b>点两个栏目再返回。</b>观察导航顺序是否与首页一致。镜像站常在这一步露出破绽，导航项顺序会差一到两位。</li>
+      <li><b>记录跳转。</b>从外部入口进入时，数一数中间页层数，把最终落地域名单独复制保存。</li>
+      <li><b>看评论时间线。</b>按时间排序，找三次以上集中回复，读原话而不是转述。原话里通常有日期和具体动作。</li>
+    </ol>
+    <p style="margin-top:14px;font-size:14px;color:var(--muted)">六步合计约 8 分钟。时间主要花在第 1 步和第 6 步，其余步骤各 30 秒左右。</p>
+  </section>
+
+  <!-- 7 FAQ -->
+  <section class="card block" id="faq">
+    <h2>常见问题：九个搜索频率最高的疑问</h2>
+    <p class="kicker">问答折叠 · 主语为领域对象</p>
+
+    <details>
+      <summary>“91”开头的主域名一定属于同一家运营方吗？</summary>
+      <p>不一定。数字前缀本身不是主体标识，注册商、备案主体、页脚声明三处信息才构成判断依据。跟踪的四个域名中，有两个注册商不同，但页脚声明字符数一致，这种情况更可能是同一模板授权使用，而非同一运营方。</p>
+    </details>
+    <details>
+      <summary>镜像站和主站的内容会同步更新吗？</summary>
+      <p>同步频率差异很大。观察期内，一个镜像站的内容比主站滞后 6 至 14 小时，另一个几乎实时。判断方法是找一条主站 11 月 6 日 21:40 发布的公告，看镜像站何时出现同一条。</p>
+    </details>
+    <details>
+      <summary>安装包权限清单新增一项，需要担心吗？</summary>
+      <p>3.5.0 相比 3.4.1 新增读取存储权限一项。是否必要取决于功能：如果版本说明提到本地缓存或相册上传，这一项可以解释；如果说明里没有对应功能，就应记录并观察后续版本是否回退。</p>
+    </details>
+    <details>
+      <summary>注册门槛 30 天意味着内容质量更高吗？</summary>
+      <p>门槛提高后长回复比例从 41 字升到 67 字，发帖量下降约 27%（剔除异常日后）。数量与质量不是简单反比，但短期看，30 天门槛确实压掉了大量一句话回复，代价是新用户参与度明显降低。</p>
+    </details>
+    <details>
+      <summary>导航站外链多跳，是否等同于不可信？</summary>
+      <p>不等同。多跳链路常见于统计归因和防直链。真正的判断点在落地域名：把最终域名查一次注册时间和备案主体，比数中间页层数有用得多。</p>
+    </details>
+    <details>
+      <summary>页脚只有版权年份，怎么判断信息新旧？</summary>
+      <p>看栏目内的单条更新时间。版权年份是静态文本，改动成本低；帖子或条目的时间戳来自数据库，更难伪造。若两处时间差超过 90 天，以条目时间为准。</p>
+    </details>
+    <details>
+      <summary>评论区里的“线路调整”说明能当事实吗？</summary>
+      <p>应归为回应层。原话只有四个字加一个时间，没有原因和恢复时间。把它当作运营方的公开回应可以，当作站点状态结论则证据不足。</p>
+    </details>
+    <details>
+      <summary>同一主体多域名，会影响搜索结果判断吗？</summary>
+      <p>会。多个域名可能分别收录不同栏目，导致搜索时看到的内容互不重叠。核对方法是用页脚声明中的同一句特征文本做精确搜索，看命中几个域名。</p>
+    </details>
+    <details>
+      <summary>离线保存页面能作为判断依据吗？</summary>
+      <p>能，但要同时保存时间、完整域名和当时的页脚文本。只存截图容易丢失地址栏信息，后续无法核对跳转链路。</p>
+    </details>
+  </section>
+
+  <!-- 8 用户评论 -->
+  <section class="card block" id="reviews">
+    <h2>用户评论：对具体条目的不同看法</h2>
+    <p class="kicker">语气多样 · 含中性评价</p>
+    <div class="reviews">
+      <div class="review">
+        <div class="who"><b>夜航船</b><span>2026-11-06</span></div>
+        <p>看了 <span class="ref">“域名注册时间与备案号对照”</span>那条，自己也查了一遍，注册年限确实是 3 年 7 个月，但备案主体名称和页脚公司名对不上，差了两个字，不知道是不是简称。</p>
+      </div>
+      <div class="review">
+        <div class="who"><b>老周记</b><span>2026-11-05</span></div>
+        <p>镜像站那篇的技术指纹说法有点绝对。我这边的两个域名导航顺序一样，页脚也几乎一样，结果一问客服是两家不同的代理。字符数一致可能只是套了同一套建站程序。</p>
+      </div>
+      <div class="review">
+        <div class="who"><b>橘子汽水</b><span>2026-11-04</span></div>
+        <p>版规改成 30 天之后我刚好卡在边缘，注册 29 天，什么也发不了。这个变化对老用户无感，对新用户挺劝退的。</p>
+      </div>
+      <div class="review">
+        <div class="who"><b>渡口</b><span>2026-11-03</span></div>
+        <p>3.5.0 的权限清单我去比对过了，多了读取存储，更新说明里确实没写。不过用下来没看到异常耗电，先留着观察。</p>
+      </div>
+      <div class="review">
+        <div class="who"><b>木鱼不开花</b><span>2026-11-02</span></div>
+        <p>中间页那个 1.2 秒的观察挺细的。我按这个方法记了三次，两次落地域名一样，一次不一样，那次没敢继续点。</p>
+      </div>
+      <div class="review">
+        <div class="who"><b>阿岚</b><span>2026-11-01</span></div>
+        <p>评论区时间线那条我觉得一般，三次集中回应本来就是公告期的正常现象，不一定说明什么。倒是 10 月 19 日页脚合并那事更值得看。</p>
+      </div>
+      <div class="review">
+        <div class="who"><b>北纬三十度</b><span>2026-10-30</span></div>
+        <p>导航站外链我点了五次，中间页停留时间基本在 1 秒上下，地址栏跳得很快，不复制的话根本看不清落地域名。这个提醒有用。</p>
+      </div>
+      <div class="review">
+        <div class="who"><b>沉舟</b><span>2026-10-27</span></div>
+        <p>版规变化记录里写的附件上传需等级 3，实际测试等级 2 也能传小文件，规则和实际执行有出入，可能是灰度。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 相关资讯 -->
+  <section class="card block" id="news">
+    <h2>相关资讯：访问异常与公告的原文摘录</h2>
+    <p class="kicker">信息层区分 · 短摘要</p>
+    <div class="news-grid">
+      <article class="news">
+        <h3>11-06 公告：线路调整说明</h3>
+        <p>正文 78 字，21:40 发布，只写“线路调整中，恢复时间另行通知”，未提影响范围。</p>
+        <div class="meta"><span class="pill">事实</span><span>2026-11-06</span></div>
+      </article>
+      <article class="news">
+        <h3>11-07 管理员回复：未给时间表</h3>
+        <p>次日上午 09:12 评论区回复，称“已联系服务商”，仍无恢复时间，措辞与公告一致。</p>
+        <div class="meta"><span class="pill">回应</span><span>2026-11-07</span></div>
+      </article>
+      <article class="news">
+        <h3>用户转述：被读成“将关停”</h3>
+        <p>部分帖子把“线路调整”转述为关停预告。原公告文本中无“关停”“停止运营”等词。</p>
+        <div class="meta"><span class="pill">转述</span><span>2026-11-07</span></div>
+      </article>
+      <article class="news">
+        <h3>页脚声明合并：由两段变一段</h3>
+        <p>2026-10-19 改动，新增“内容由用户上传”，删除原第二段的联系邮箱说明，四个域名同步。</p>
+        <div class="meta"><span class="pill">事实</span><span>2026-10-19</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 10 相关推荐 -->
+  <section class="card block" id="recommend">
+    <h2>相关推荐：继续查的词与条目</h2>
+    <p class="kicker">标签索引 · 长尾词</p>
+    <div class="tags">
+      <a href="/#deep">91类站点域名备案怎么查</a>
+      <a href="/#guide">镜像站技术指纹比对方法</a>
+      <a href="/#faq">安装包权限清单版本差异</a>
+      <a href="/#latest">论坛版规注册门槛变化</a>
+      <a href="/#reviews">评论区时间线原话摘录</a>
+      <a href="/#trust">站点可信度分层标准</a>
+      <a href="/#news">访问异常公告原文</a>
+      <a href="/#deep">导航站多跳跳转链路</a>
+      <a href="/#guide">页脚免责声明文本比对</a>
+      <a href="/#channels">91数字前缀站点分类</a>
+    </div>
+  </section>
+
+  <!-- 11 可信度分层 -->
+  <section class="card block" id="trust">
+    <h2>可信度分层：证据强弱的三档划分</h2>
+    <p class="kicker">对照面板 · 可核对</p>
+    <p class="dek">同一件事，不同证据的强度差别很大。下面三档按“是否可被第三方复核”划分，不按来源名气。</p>
+    <div class="trust">
+      <div class="tier tier-a">
+        <h3>A 档：可直接复核</h3>
+        <p>域名注册记录、备案主体、页面时间戳、权限清单字段。这些可由任意第三方在相同时间查询得到，结果一致。</p>
+      </div>
+      <div class="tier tier-b">
+        <h3>B 档：需交叉印证</h3>
+        <p>页脚声明措辞、导航顺序、中间页停留秒数。单次观察可能偶然，需两次以上不同时间重复。</p>
+      </div>
+      <div class="tier tier-c">
+        <h3>C 档：仅作线索</h3>
+        <p>评论区转述、截图、口头客服答复。可作为查证起点，单独不能支撑结论。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 引语/社区 -->
+  <section class="card block" id="community">
+    <h2>社区生态：等级体系与发帖权限的实际分布</h2>
+    <p class="kicker">观察记录 · 数字为主</p>
+    <p>某社区把用户分为 6 级。等级 1 至 2 只能浏览与点赞，等级 3 开放附件上传，等级 4 可发起投票，等级 5 以上可申请版主。2026-11-05 的抽样中，样本 1,200 个账号，等级 1 占 46%，等级 2 占 24%，等级 3 占 19%，等级 4 占 8%，等级 5 与 6 合计 3%。</p>
+    <p>附件上传权限卡在等级 3，对应约 30% 的账号。11 月 1 日至 11 月 5 日，等级 2 账号上传请求 122 次，全部被拒，提示语统一为“等级不足”。有用户反映等级 2 偶尔能传小文件，属于灰度测试，未在规则中说明。</p>
+  </section>
+
+  <div class="quote">
+    <blockquote>“判断这类站点，先看页脚有没有具体日期和主体名，再看导航顺序对不对得上。两样都有，才值得往下点。”</blockquote>
+    <cite>—— 来自 2026-11-05 的一次访问前检查记录，检查人未署名</cite>
+  </div>
+
+</main>
+
+<aside class="side" aria-label="侧栏导航">
+  <nav class="card" aria-label="页面目录">
+    <h2>本页目录</h2>
+    <ul class="side-nav" id="sideNav">
+      <li><a href="/#overview">领域概览</a></li>
+      <li><a href="/#featured">精选内容推荐</a></li>
+      <li><a href="/#latest">最新更新</a></li>
+      <li><a href="/#channels">分类入口</a></li>
+      <li><a href="/#deep">深度解析</a></li>
+      <li><a href="/#guide">体验指南</a></li>
+      <li><a href="/#faq">常见问题</a></li>
+      <li><a href="/#reviews">用户评论</a></li>
+      <li><a href="/#news">相关资讯</a></li>
+      <li><a href="/#recommend">相关推荐</a></li>
+      <li><a href="/#trust">可信度分层</a></li>
+      <li><a href="/#community">社区生态</a></li>
+    </ul>
+  </nav>
+  <div class="card">
+    <h2>快速核对</h2>
+    <ul class="mini" style="list-style:none;padding:0">
+      <li>域名注册年限：3 年 7 个月</li>
+      <li>备案复查：2026-11-02</li>
+      <li>页脚声明改写：2026-10-19</li>
+      <li>版规门槛：7 天 → 30 天</li>
+      <li>安装包：3.4.1 → 3.5.0</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>数据说明</h2>
+    <div class="kv"><span>板块数</span><b>11</b></div>
+    <div class="kv"><span>频道数</span><b>12</b></div>
+    <div class="kv"><span>问答数</span><b>9</b></div>
+    <div class="kv"><span>评论数</span><b>8</b></div>
+    <div class="kv"><span>页脚更新</span><b>11-07</b></div>
+  </div>
+</aside>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="flogo">
+          <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#24406e"/>
+            <path d="M18 20h14a8 8 0 0 1 0 16H18z" fill="none" stroke="#f0b429" stroke-width="4"/>
+            <path d="M46 44h-8a6 6 0 0 1-6-6V20" fill="none" stroke="#e9eef8" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          关于91
+        </div>
+        <p>把数字简称还原成可查的域名、备案与版本记录，用时间点和字符数支撑每一次判断。</p>
+      </div>
+      <div>
+        <h3>核对栏目</h3>
+        <ul>
+          <li><a href="/#overview">领域概览</a></li>
+          <li><a href="/#deep">深度解析</a></li>
+          <li><a href="/#trust">可信度分层</a></li>
+          <li><a href="/#guide">体验指南</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>体验与问答</h3>
+        <ul>
+          <li><a href="/#faq">常见问题</a></li>
+          <li><a href="/#reviews">用户评论</a></li>
+          <li><a href="/#community">社区生态</a></li>
+          <li><a href="/#news">相关资讯</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>索引与推荐</h3>
+        <ul>
+          <li><a href="/#channels">分类入口</a></li>
+          <li><a href="/#latest">最新更新</a></li>
+          <li><a href="/#recommend">相关推荐</a></li>
+          <li><a href="/#featured">精选内容</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>示例数据说明：文中域名注册年限、帖子数、权限清单、抽样比例均为演示用示例，不代表真实站点数据；日期范围为 2026-10-09 至 2026-11-08。</span>
+      <span>内容更新时间：2026-11-07（对应“最新更新”板块首条）</span>
+    </div>
+    <div class="foot-note" style="border-top:0;margin-top:8px;padding-top:0">
+      <span>© 2026 关于91 · 版权归页面所有者所有</span>
+      <span>联系：示例邮箱仅供演示</span>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="回到顶部" title="回到顶部">↑</button>
+
+<script>
+(function(){
+  var menuBtn=document.getElementById('menuBtn');
+  var nav=document.getElementById('siteNav');
+  if(menuBtn&&nav){
+    menuBtn.addEventListener('click',function(){
+      var open=nav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded',open?'true':'false');
+    });
+    nav.addEventListener('click',function(e){
+      if(e.target.tagName==='A'&&window.innerWidth<=860){
+        nav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+
+  var toTop=document.getElementById('toTop');
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>560){toTop.classList.add('show');}else{toTop.classList.remove('show');}
+  },{passive:true});
+  toTop.addEventListener('click',function(){
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  // 侧栏高亮
+  var links=Array.prototype.slice.call(document.querySelectorAll('#sideNav a'));
+  var targets=links.map(function(a){
+    var id=a.getAttribute('href').replace('/#','');
+    return document.getElementById(id);
+  });
+  var ticking=false;
+  function highlight(){
+    var pos=window.scrollY+160;
+    var idx=-1;
+    for(var i=0;i<targets.length;i++){
+      if(targets[i]&&targets[i].offsetTop<=pos){idx=i;}
+    }
+    links.forEach(function(a,i){a.classList.toggle('active',i===idx);});
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){
+    if(!ticking){ticking=true;window.requestAnimationFrame(highlight);}
+  },{passive:true});
+  highlight();
+
+  // 本地查找
+  var form=document.getElementById('searchForm');
+  var input=document.getElementById('q');
+  var note=document.getElementById('searchNote');
+  var main=document.querySelector('main');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var q=(input.value||'').trim();
+    if(!q){note.style.display='none';return;}
+    var blocks=main.querySelectorAll('section, .deep, .quote');
+    var found=[];
+    blocks.forEach(function(b){
+      if(b.textContent.indexOf(q)>-1){
+        found.push(b);
+        b.style.outline='2px solid #f0b429';
+        setTimeout(function(){b.style.outline='';},2200);
+      }
+    });
+    if(found.length){
+      note.style.display='block';
+      note.style.color='#1f7a5a';
+      note.textContent='找到 '+found.length+' 处相关内容，已用高亮标出。';
+      found[0].scrollIntoView({behavior:'smooth',block:'start'});
+    }else{
+      note.style.display='block';
+      note.style.color='#a1531b';
+      note.textContent='没有找到“'+q+'”相关条目，可换用“备案”“镜像站”“版规”“权限”等词再试。';
+    }
+  });
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"关于91",
+  "inLanguage":"zh-CN",
+  "description":"围绕91类站点的识别方法、域名备案核对、镜像站技术指纹、版规与权限差异的说明页面。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"“91”开头的主域名一定属于同一家运营方吗？","acceptedAnswer":{"@type":"Answer","text":"不一定。数字前缀本身不是主体标识，注册商、备案主体、页脚声明三处信息才构成判断依据。"}},
+    {"@type":"Question","name":"镜像站和主站的内容会同步更新吗？","acceptedAnswer":{"@type":"Answer","text":"同步频率差异很大。观察期内，一个镜像站的内容比主站滞后6至14小时，另一个几乎实时。"}},
+    {"@type":"Question","name":"安装包权限清单新增一项，需要担心吗？","acceptedAnswer":{"@type":"Answer","text":"3.5.0相比3.4.1新增读取存储权限一项，是否必要取决于版本说明中是否提到对应功能。"}},
+    {"@type":"Question","name":"注册门槛30天意味着内容质量更高吗？","acceptedAnswer":{"@type":"Answer","text":"门槛提高后长回复比例从41字升到67字，发帖量下降约27%，新用户参与度明显降低。"}},
+    {"@type":"Question","name":"导航站外链多跳，是否等同于不可信？","acceptedAnswer":{"@type":"Answer","text":"不等同。多跳链路常见于统计归因和防直链，判断点在于落地域名的注册时间与备案主体。"}},
+    {"@type":"Question","name":"页脚只有版权年份，怎么判断信息新旧？","acceptedAnswer":{"@type":"Answer","text":"看栏目内的单条更新时间。若两处时间差超过90天，以条目时间为准。"}},
+    {"@type":"Question","name":"评论区里的“线路调整”说明能当事实吗？","acceptedAnswer":{"@type":"Answer","text":"应归为回应层。原话只有四个字加一个时间，没有原因和恢复时间，不能作为站点状态结论。"}},
+    {"@type":"Question","name":"同一主体多域名，会影响搜索结果判断吗？","acceptedAnswer":{"@type":"Answer","text":"会。可用页脚声明中的同一句特征文本做精确搜索，看命中几个域名。"}},
+    {"@type":"Question","name":"离线保存页面能作为判断依据吗？","acceptedAnswer":{"@type":"Answer","text":"能，但要同时保存时间、完整域名和当时的页脚文本，只存截图会丢失地址栏信息。"}}
+  ]
+}
+</script>
+</body>
+  </html>
